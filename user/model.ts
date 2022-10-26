@@ -11,6 +11,10 @@ export type User = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   username: string;
   password: string;
+  groupPair?: Array<Types.ObjectId>;
+  groups?: Array<Types.ObjectId>;
+  following?: Array<Types.ObjectId>;
+  followedBy?: Array<Types.ObjectId>;
   dateJoined: Date;
 };
 
@@ -33,6 +37,33 @@ const UserSchema = new Schema({
     type: Date,
     required: true
   }
+}, {
+  toObject: { virtuals: true, versionKey: false },
+  toJSON: { virtuals: true, versionKey: false }
+});
+
+UserSchema.virtual('groupPair', {
+  ref: 'GroupPair',
+  localField: '_id',
+  foreignField: 'user'
+});
+
+UserSchema.virtual('groups', {
+  ref: 'Group',
+  localField: '_id',
+  foreignField: 'user'
+});
+
+UserSchema.virtual('following', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'fromUser'
+});
+
+UserSchema.virtual('followedBy', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'toUser'
 });
 
 const UserModel = model<User>('User', UserSchema);

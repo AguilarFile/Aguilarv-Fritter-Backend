@@ -313,3 +313,142 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+#### `POST /api/follow/:author?` - follow a user
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` is the username is empty
+- `409` if the user is already following them
+
+#### `DELETE /api/follow/:author?` - unfollow a user
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` is the username is empty
+- `409` if the user is not following them
+
+#### `GET /api/follow` - get all users the user is following
+
+**returns**
+
+- All the users that the user is following
+
+**Throws**
+
+- `403` if the user is not logged in
+
+#### `GET /api/group/:group?` - create a group
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `409` if the group already exists
+
+#### `DELETE /api/group/:group?` - delete a group
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `409` if the group does not exist
+
+#### `PUT /api/group/:group?/:name?` - change the group name
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `409` if the group does not exist
+- `409` if the name is already taken
+
+#### `POST /api/groupPair/:group?/:author?` - add user to group
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the username is empty
+- `404` if the group does not exist
+- `404` if the user is not following the other user
+- `409` if the user is already part of the group
+
+#### `DELETE /api/groupPair/:group?/:author?` - remove user from group
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` if the username is empty
+- `404` if the group does not exist
+- `409` if the user is not part of the group
+
+#### `GET /api/groupPair/:group?` - get all users from group
+
+**returns**
+
+- the users that are part of the group
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the group does not exist
+
+#### `POST /api/reaction/:freetId?/:type?` - add reaction
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freet does not exist
+- `404` if the group does not exist
+- `409` if the same reaction already exists
+- `400` if it is not a valid reaction
+
+#### `DELETE /api/reaction/:freetId?/:type?` - remove reaction
+
+**returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freet does not exist
+- `404` if the reaction does not exist
+
+
+#### `GET /api/wholesomeTag/` - get all wholesome freets
+
+**returns**
+
+- all wholesome freets
